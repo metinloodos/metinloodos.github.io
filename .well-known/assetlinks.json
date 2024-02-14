@@ -1,1 +1,9 @@
-[]
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.fibabanka.alisgidis.dev.debug",
+    "sha256_cert_fingerprints":
+    ["BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"]
+  }
+}]
