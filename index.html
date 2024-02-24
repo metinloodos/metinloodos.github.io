@@ -1,64 +1,21 @@
-'use client';
-
-import React, { useEffect } from 'react';
-
-import Loading from '@/components/loading';
-
-import { getStatusData } from '@/services';
-import { AxiosResponse } from '@/services/types';
-
-import { useSearchParams } from 'next/navigation';
-
-import { sendPageTrigger } from '@/helpers/event-trigger';
-import { PlatformType } from '@/app/enum';
-
-export default function RedirectLogin() {
-  const searchParams = useSearchParams();
-
-  const getData = async (transactionId: string, isNewUser: string, platform: string) => {
-    const newUser = isNewUser === 'true' || isNewUser === 'True';
-    const response: AxiosResponse = await getStatusData(`?transactionId=${transactionId}&status=true`);
-    const { data } = response;
-    const { friendlyMessage, payload } = data;
-
-    if (payload.successUrl && platform !== PlatformType.Android) {
-      (window as any).location.href = payload.successUrl;
-    } else {
-      await sendPageTrigger({
-        status: 'success',
-        isNewUser: newUser,
-        userMessage: friendlyMessage?.title ?? '',
-      });
-
-      if (newUser) {
-        if (platform === PlatformType.Android) {
-          (window as any).location.href =
-            `https://redirect.sappd.alisgidis.com/android-presuccess?transactionId=${transactionId}`;
-        } else {
-          (window as any).location.href = `https://sappd.alisgidis.com/result/success/${transactionId}`;
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönlendirme Sayfası</title>
+    <script type="text/javascript">
+        // Sayfa yüklendiğinde çalışacak fonksiyon
+        function redirect() {
+            setTimeout(function() {
+                // Bu URL'i kendi uygulamanızın URL'i ile değiştirin
+                window.location.href = "https://redirect.sappd.alisgidis.com/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b";
+            }, 3000); // 3000 milisaniye = 3 saniye
         }
-      } else {
-        if (platform === PlatformType.Android) {
-          if (payload.successUrl) {
-            (window as any).location.href =
-              `https://redirect.sappd.alisgidis.com/android-success-url?transactionId=${transactionId}&successUrl=${payload.successUrl}`;
-          } else {
-            (window as any).location.href =
-              `https://redirect.sappd.alisgidis.com/android-success?transactionId=${transactionId}`;
-          }
-        } else {
-          (window as any).location.href = `https://sappd.alisgidis.com/result/success/${transactionId}`;
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    const transactionId = searchParams.get('transactionId') ?? '';
-    const isNewUser = searchParams.get('isNewUser') ?? '';
-    const platform = searchParams.get('platform') ?? '';
-    getData(transactionId, isNewUser, platform);
-  }, []);
-
-  return <Loading />;
-}
+    </script>
+</head>
+<body onload="redirect()">
+    <h1>Web sitesine hoş geldiniz!</h1>
+    <p>3 saniye sonra başka bir sayfaya yönlendirileceksiniz...</p>
+</body>
+</html>
