@@ -1,23 +1,64 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merhaba Dünya</title>
-    <script type="text/javascript">
-        function openDeeplink() {
-            // Deeplink URL'inizi buraya yazın
-            var deeplinkUrl = "https://redirect.sappd.alisgidis.com/success?transactionId=01000000-3c60-faaa-3487-08dc2d4ff249";
-            
-            // Deeplink URL'ini aç
-            window.location.href = deeplinkUrl;
+'use client';
+
+import React, { useEffect } from 'react';
+
+import Loading from '@/components/loading';
+
+import { getStatusData } from '@/services';
+import { AxiosResponse } from '@/services/types';
+
+import { useSearchParams } from 'next/navigation';
+
+import { sendPageTrigger } from '@/helpers/event-trigger';
+import { PlatformType } from '@/app/enum';
+
+export default function RedirectLogin() {
+  const searchParams = useSearchParams();
+
+  const getData = async (transactionId: string, isNewUser: string, platform: string) => {
+    const newUser = isNewUser === 'true' || isNewUser === 'True';
+    const response: AxiosResponse = await getStatusData(`?transactionId=${transactionId}&status=true`);
+    const { data } = response;
+    const { friendlyMessage, payload } = data;
+
+    if (payload.successUrl && platform !== PlatformType.Android) {
+      (window as any).location.href = payload.successUrl;
+    } else {
+      await sendPageTrigger({
+        status: 'success',
+        isNewUser: newUser,
+        userMessage: friendlyMessage?.title ?? '',
+      });
+
+      if (newUser) {
+        if (platform === PlatformType.Android) {
+          (window as any).location.href =
+            `https://redirect.sappd.alisgidis.com/android-presuccess?transactionId=${transactionId}`;
+        } else {
+          (window as any).location.href = `https://sappd.alisgidis.com/result/success/${transactionId}`;
         }
-    </script>
-</head>
-<body>
-    <h1>Merhaba Dünya</h1>
-    <p>Bu benim GitHub Pages üzerindeki ilk sayfam!</p>
-    <!-- Butona tıklandığında 'openDeeplink()' fonksiyonunu çağır -->
-    <button onclick="openDeeplink()">Deeplink ile Uygulamayı Aç</button>
-</body>
-</html>
+      } else {
+        if (platform === PlatformType.Android) {
+          if (payload.successUrl) {
+            (window as any).location.href =
+              `https://redirect.sappd.alisgidis.com/android-success-url?transactionId=${transactionId}&successUrl=${payload.successUrl}`;
+          } else {
+            (window as any).location.href =
+              `https://redirect.sappd.alisgidis.com/android-success?transactionId=${transactionId}`;
+          }
+        } else {
+          (window as any).location.href = `https://sappd.alisgidis.com/result/success/${transactionId}`;
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    const transactionId = searchParams.get('transactionId') ?? '';
+    const isNewUser = searchParams.get('isNewUser') ?? '';
+    const platform = searchParams.get('platform') ?? '';
+    getData(transactionId, isNewUser, platform);
+  }, []);
+
+  return <Loading />;
+}
