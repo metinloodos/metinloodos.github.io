@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İkinci Sayfa</title>
+    <title>Yönlendirme Sayfası</title>
+    <script type="text/javascript">
+        function redirect() {
+            setTimeout(function() {
+                window.location.replace("alisgidis://redirect.sappd.alisgidis.com/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b");
+            }, 3000); // 3000 milisaniye = 3 saniye
+        }
+
+//https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://domain.name:optional_port&relation=delegate_permission/common.handle_all_urls
+//window.location.href = "https://redirect.sappd.alisgidis.com/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b";
+//window.location.href = "https://metinloodos.github.io/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b";
+    </script>
 </head>
-<body>
-    <h1>İkinci Sayfaya Hoş Geldiniz!</h1>
-    <p>Burada bir buton ile ana sayfaya geri dönebilirsiniz.</p>
-    <!-- Butona tıkladığında index.html sayfasına yönlendir -->
-    <button onclick="window.location.href='index1.html'">Ana Sayfaya Dön</button>
+<body onload="redirect()">
+    <h1>Web sitesine hoş geldiniz!!!!</h1>
+    <p>3 saniye sonra başka bir sayfaya yönlendirileceksiniz...</p>
 </body>
 </html>
