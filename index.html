@@ -1,23 +1,78 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönlendirme Sayfası</title>
-    <script type="text/javascript">
-        function redirect() {
-            setTimeout(function() {
-                window.location.replace("alisgidis://redirect.sappd.alisgidis.com/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b");
-            }, 3000); // 3000 milisaniye = 3 saniye
+    <title>Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
         }
-
-//https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://domain.name:optional_port&relation=delegate_permission/common.handle_all_urls
-//window.location.href = "https://redirect.sappd.alisgidis.com/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b";
-//window.location.href = "https://metinloodos.github.io/android-success?transactionId=01000000-0f95-26fe-0a3b-08dc346c672b";
-    </script>
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-<body onload="redirect()">
-    <h1>Web sitesine hoş geldiniz!!!!</h1>
-    <p>3 saniye sonra başka bir sayfaya yönlendirileceksiniz...</p>
+<body>
+    <div class="form-container">
+        <form action="send_email.php" method="post">
+            <div class="form-group">
+                <label for="name">Ad</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Kullanıcı Mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="reason">Neden Silmek İstiyorsun?</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Gönder</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
