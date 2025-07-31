@@ -1,52 +1,9 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.fibabanka.alisgidis",
-      "sha256_cert_fingerprints": [
-        "BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.fibabanka.alisgidis.dev.debug",
-      "sha256_cert_fingerprints": [
-        "BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.fibabanka.alisgidis.dev",
-      "sha256_cert_fingerprints": [
-        "BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.fibabanka.alisgidis.beta",
-      "sha256_cert_fingerprints": [
-        "BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.fibabanka.alisgidis.beta.debug",
-      "sha256_cert_fingerprints": [
-        "BA:D2:BA:3A:EE:3B:DF:86:27:69:84:AD:5C:B1:DF:BE:DB:D1:CF:07:AD:39:69:48:E3:04:13:DC:C5:52:FE:FE"
-      ]
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "loodos.enliq.demo.alpha",
+    "sha256_cert_fingerprints":
+    ["C7:5E:D0:53:56:DC:4F:66:C0:4A:03:31:6A:8E:DC:48:26:7C:EE:AB:97:80:51:A7:3C:E3:A5:AF:52:63:BB:32"]
   }
-]
+}]
